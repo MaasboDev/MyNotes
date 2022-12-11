@@ -22,7 +22,10 @@ fun App(appState: AppState) {
 
     MaterialTheme {
         Column {
-            TextField(value = appState.text.value, onValueChange = { newText -> appState.text.value = newText })
+            TextField(
+                value = appState.text.value,
+                onValueChange = { newText -> appState.text.value = newText }
+            )
             Text(text = buildMessage(appState.text.value))
             Button(onClick = { appState.text.value = "" }, enabled = appState.buttonEnabled) {
                 Text("Clean")
