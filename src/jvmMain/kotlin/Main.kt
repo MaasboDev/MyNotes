@@ -27,7 +27,7 @@ import androidx.compose.ui.window.application
 
 @Composable
 @Preview
-fun App(appState: AppState): Unit = with(appState) {
+fun App(): Unit = with(AppState) {
 
     if (state.value.notes == null) {
         LaunchedEffect(true) {
@@ -85,10 +85,11 @@ private fun NotesList(notes: List<Note>) {
     }
 }
 
-fun main() = application {
-    val appState = AppState()
+fun main() {
 
-    Window(onCloseRequest = ::exitApplication) {
-        App(appState)
+    application {
+        Window(onCloseRequest = ::exitApplication) {
+            App()
+        }
     }
 }
