@@ -33,7 +33,7 @@ fun App(): Unit = with(AppState) {
 
     if (notes == null) {
         LaunchedEffect(true) {
-            loadNotes()
+            loadNotes(this)
         }
     }
 
