@@ -30,31 +30,24 @@ fun TopBar(onFilterClick: (Filter) -> Unit) {
 private fun FiltersAction(onFilterClick: (Filter) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
     IconButton(onClick = { expanded = true }) {
-        Icon(
-            imageVector = Icons.Default.FilterList,
-            contentDescription = "Filter"
-        )
+
+        Icon(imageVector = Icons.Default.FilterList, contentDescription = "Filter")
+
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            DropdownMenuItem(onClick = {
-                expanded = false
-                onFilterClick(Filter.All)
-            }) {
-                Text("All")
-            }
-            DropdownMenuItem(onClick = {
-                expanded = false
-                onFilterClick(Filter.ByType(Type.TEXT))
-            }) {
-                Text("Text")
-            }
-            DropdownMenuItem(onClick = {
-                expanded = false
-                onFilterClick(Filter.ByType(Type.AUDIO))
-            }) {
-                Text("Audio")
+            listOf(
+                Filter.All to "All",
+                Filter.ByType(Type.TEXT) to "Text",
+                Filter.ByType(Type.AUDIO) to "Audio"
+            ).forEach { (filter, label) ->
+                DropdownMenuItem(onClick = {
+                    expanded = false
+                    onFilterClick(filter)
+                }) {
+                    Text(label)
+                }
             }
         }
     }
