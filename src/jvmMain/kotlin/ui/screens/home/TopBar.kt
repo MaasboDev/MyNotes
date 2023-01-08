@@ -13,19 +13,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import data.Filter
+import data.Note.Type
 
 @Composable
-fun TopBar() {
+fun TopBar(onFilterClick: (Filter) -> Unit) {
     TopAppBar(
         title = { Text("My Notes") },
         actions = {
-            FiltersAction()
+            FiltersAction(onFilterClick)
         }
     )
 }
 
 @Composable
-private fun FiltersAction() {
+private fun FiltersAction(onFilterClick: (Filter) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
     IconButton(onClick = { expanded = true }) {
         Icon(
@@ -36,13 +38,22 @@ private fun FiltersAction() {
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            DropdownMenuItem(onClick = {}) {
+            DropdownMenuItem(onClick = {
+                expanded = false
+                onFilterClick(Filter.All)
+            }) {
                 Text("All")
             }
-            DropdownMenuItem(onClick = {}) {
+            DropdownMenuItem(onClick = {
+                expanded = false
+                onFilterClick(Filter.ByType(Type.TEXT))
+            }) {
                 Text("Text")
             }
-            DropdownMenuItem(onClick = {}) {
+            DropdownMenuItem(onClick = {
+                expanded = false
+                onFilterClick(Filter.ByType(Type.AUDIO))
+            }) {
                 Text("Audio")
             }
         }
