@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,6 +20,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -29,18 +32,16 @@ import androidx.compose.ui.window.application
 @Preview
 fun App(): Unit = with(AppState) {
 
-    val notes = state.notes
+    val state by state.collectAsState()
 
-    if (notes == null) {
-        LaunchedEffect(true) {
-            loadNotes(this)
-        }
+    LaunchedEffect(true) {
+        loadNotes(this)
     }
 
     MaterialTheme {
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxSize()
         ) {
             if (state.loading) {
                 CircularProgressIndicator()
