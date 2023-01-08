@@ -1,9 +1,13 @@
+package ui.screens.home
+
+import data.Note
+import data.getNotes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-object AppState {
+object HomeState {
     private val _state = MutableStateFlow(UiState())
     val state = _state.asStateFlow()
 
