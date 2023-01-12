@@ -2,7 +2,7 @@ package ui.screens.home
 
 import data.Filter
 import data.Note
-import data.getNotes
+import data.fakeNotes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +17,7 @@ object HomeState {
         coroutineScope.launch {
             _state.value = UiState(loading = true)
 
-            getNotes().collect {
+            Note.fakeNotes.collect {
                 _state.value = UiState(notes = it)
             }
         }
